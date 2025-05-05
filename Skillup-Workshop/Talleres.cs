@@ -1,6 +1,6 @@
 namespace skillupWorkshop
 {
-    public class Talleres
+    public class Taller
     {
         private string _nombre;
         public string Nombre
@@ -13,7 +13,7 @@ namespace skillupWorkshop
                 _nombre = value;
             }
         }
-        public Talleres(string nombre)
+        public Taller(string nombre)
         {
             Nombre = nombre;
         }
