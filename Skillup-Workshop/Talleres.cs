@@ -8,18 +8,31 @@ namespace skillupWorkshop
             get { return _nombre; }
             private set
             {
-                if (string.IsNullOrEmpty(value))
-                    throw new ArgumentException("El nombre no puede estar vacío");
+                Validaciones.ValidarNombre(value);
                 _nombre = value;
             }
         }
-        public Taller(string nombre)
+
+        private string _descripcion; 
+        public string Descripcion
         {
-            Nombre = nombre;
+            get { return _descripcion; }
+            private set
+            {
+                Validaciones.ValidarDescripcion(value);
+                _descripcion = value;
+            }
         }
-        public override string ToString()
+
+        private double _costo;
+        public double Costo
         {
-            return Nombre;
+            get { return _costo; }
+            private set
+            {
+                Validaciones.ValidarCosto(value);
+            _costo = value;
+            }
         }
     }
 
