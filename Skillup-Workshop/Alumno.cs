@@ -7,10 +7,11 @@ namespace Skillup_Workshop
 {
     public class Alumno
     {
+        //Terminado
         private string nombre;
-        public string Nombre{ get{return nombre;} set{ Validaciones.Nombre_Apellido(value); nombre=value;}}
+        public string Nombre{ get{return nombre;} set{ Validaciones.Longitud(value); nombre=value;}}
         private string apellido;
-        public string Apellido{get{return apellido;} set{Validaciones.Nombre_Apellido(value); apellido=value;}}
+        public string Apellido{get{return apellido;} set{Validaciones.Longitud(value); apellido=value;}}
         public DateTime Nacimiento{get; private set;}
         private string correo;
         public string Correo{get{return correo;} set{ Validaciones.Correo(value); correo=value;}}
@@ -20,9 +21,9 @@ namespace Skillup_Workshop
         public string Dirección{get{return dirección;} set{Validaciones.Dirección(value); dirección=value;}}
         public string ContactoEmergente;
         public Alumno(string Nombre, string Apellido, DateTime Nacimiento, string Correo, string Teléfono, string Dirección, string ContactoEmergente){
-            Validaciones.Nombre_Apellido(Nombre);
+            Validaciones.Longitud(Nombre);
             this.Nombre=Nombre;
-            Validaciones.Nombre_Apellido(Apellido);
+            Validaciones.Longitud(Apellido);
             this.Apellido=Apellido;
             Validaciones.Nacimiento(Nacimiento);
             this.Nacimiento=Nacimiento;
@@ -32,6 +33,7 @@ namespace Skillup_Workshop
             this.Teléfono=Teléfono;
             Validaciones.Dirección(Dirección);
             this.Dirección=Dirección;
+            Validaciones.Teléfono(ContactoEmergente);
             this.ContactoEmergente=ContactoEmergente;
         }
     }

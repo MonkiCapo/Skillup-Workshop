@@ -13,25 +13,12 @@ namespace Skillup_Workshop
         public uint Costo{get; private set;} //En pesos
         public byte Duración{get; private set;} //En semanas
         public byte Cupos{get; private set;}
-
-        private string _dificultad;
-        public string Dificultad
-        {
-            get { return _dificultad; }
-            private set
-            {
-                if (value == "Inicial" || value == "Intermedio" || value == "Dificil")
-                    Dificultad = value;
-                else
-                    throw new ArgumentException("Dificultad no valida");
-
-            }
-        }
+        public string Dificultad{get; private set;}
         public Instructor instructor {get; private set;}
         public EspacioFísico espacioFísico{get; private set;}
         public List<Inscripción>? inscripción {get; private set;}
-        public Taller(string Nombre, string Descripción, uint Costo, byte Duración, byte Cupos, string Dificultad, Instructor instructor, string Lugar, string Dirección, byte CapacidadMax, bool AccesForDisabled){
-            Validaciones.Nombre_Apellido(Nombre);
+        public Taller(string Nombre, string Descripción, uint Costo, byte Duración, byte Cupos, string Dificultad, Instructor instructor, string Lugar, string Dirección, ushort CapacidadMax, bool AccesoMovilidadReducida){
+            Validaciones.Longitud(Nombre);
             this.Nombre=Nombre;
             Validaciones.Descripción(Descripción);
             this.Descripción=Descripción;
@@ -39,8 +26,10 @@ namespace Skillup_Workshop
             this.Duración=Duración;
             this.Cupos=Cupos;
             this.Dificultad=Dificultad;
+            Validaciones.AsignarInstructor(instructor);
             this.instructor=instructor;
-            espacioFísico=new EspacioFísico(Lugar, Dirección, CapacidadMax, AccesForDisabled);
+            instructor.SetOcupado(true);
+            espacioFísico=new EspacioFísico(Lugar, Dirección, CapacidadMax, AccesoMovilidadReducida);
         }
         public void SetDescripción(string descripción){
             Validaciones.Descripción(descripción);
@@ -49,14 +38,24 @@ namespace Skillup_Workshop
         public void SetCosto(uint costo){
             Costo=costo;
         }
-        public void IniciarInscripción(Alumno alumno, bool Pagó,string Estado){
+        public void SetDificultad(string _dificultad){
+           Validaciones.Dificultad(_dificultad);
+           Dificultad=_dificultad;
+        }
+        public void IniciarInscripción(Alumno alumno,Taller taller, bool Pagó,string Estado){
             if(inscripción?.Count < Cupos){
-                inscripción.Add(new Inscripción(alumno, Pagó, Estado));
+                inscripción.Add(new Inscripción(alumno,taller, Pagó, Estado));
             }
             else{
                 throw new ArgumentException("Taller completo.");
             }
         }
-        
+
+        public void EliminarTaller_E_Inscripciones(Taller taller)
+        {   
+            Console.WriteLine($"Eliminando {inscripción?.Count ?? 0} inscripciones del taller: {Nombre}");
+            inscripción?.Clear();
+            taller=null;
+        }
     }
 }

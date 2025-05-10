@@ -8,14 +8,15 @@ namespace Skillup_Workshop
 {
     public class Inscripción
     {
-        public Alumno alumno{get; private set;}
-        public Taller? taller{get; private set;}
+        public Alumno? alumno{get; private set;}
+        public Taller taller{get; private set;}
         public DateTime fechaInscripción{get; private set;}
         public bool Pagó{get; private set;}
         public string Estado {get; private set;}
         public List<string> estados= new List<string>(){"Activa","Cancelada","Finalizada"};
-        public Inscripción(Alumno alumno, bool Pagó, string Estado){
+        public Inscripción(Alumno alumno,Taller taller, bool Pagó, string Estado){
             this.alumno=alumno;
+            this.taller=taller;
             fechaInscripción=DateTime.Now;
             this.Pagó=Pagó;
             this.Estado=Estado;
@@ -29,7 +30,13 @@ namespace Skillup_Workshop
                     throw new Exception("");
                 }
                 Estado=_estado;
+                if(Estado=="Cancelado"){
+                    alumno=null;
+                }
             }
+        }
+        public void SetPagó(bool pagó){
+            Pagó=pagó;
         }
     }
 }

@@ -8,14 +8,14 @@ namespace Skillup_Workshop
 {
     public class Validaciones
     {
-        public static void Nombre_Apellido(string cadena){
+        public static void Longitud(string cadena){
             if(cadena.Length>35){
                 throw new ArgumentException("Sobrepasa el límite de 35 caracteres");
             }
         }
         public static void Descripción(string descripción){
             if(descripción.Length>355){
-                throw new ArgumentException("");
+                throw new ArgumentException("Sobrepasa el límite de 355 caracteres");
             }
         }
 
@@ -40,24 +40,30 @@ namespace Skillup_Workshop
         public static void Teléfono(string Teléfono){
             
             if(!int.TryParse(Teléfono,out _) || Teléfono.Length>10){
-                throw new ArgumentException("");
+                throw new ArgumentException("El teléfono solo debe contener números y no superar los 10 caracteres.");
             }
         }
         public static void Dirección(string Dirección){
             if(Dirección.Length>28){
-                throw new ArgumentException("");
+                throw new ArgumentException("La dirección supera los 28 caracteres");
             }
         }
         public static void Nacimiento(DateTime Nacimiento){
-            if(Nacimiento ==DateTime.Now ){
-                throw new ArgumentException("");
+            if(Nacimiento>=DateTime.Now.Date.AddYears(-18)){
+                throw new ArgumentException("Es necesario tener más de 18 años para ingresar al programa.");
             }
         }
-        public static void Instructor(bool Disponible){
-            if(!Disponible){
-                
+        public static void AsignarInstructor(Instructor instructor){
+            if(instructor.Ocupado){
+                if(!instructor.Disponible){
+                    throw new Exception("El instructor no se encuentra disponible para dar más clases.");
+                }
+            }
+        }
+        public static void Dificultad(string _dificultad){
+            if(_dificultad !="Avanzado" || _dificultad !="Intermedio" || _dificultad !="Facil"){
+                throw new Exception("La dificultad ingresada no está validada para su registro");
             }
         }
     }
-    
 }
