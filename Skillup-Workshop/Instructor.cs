@@ -7,11 +7,11 @@ namespace Skillup_Workshop
 {
     public class Instructor
     {
-        private string Nombre{get; private set;}
+        public string Nombre{get; private set;}
         public string Apellido{get; private set;}
-        private string DNI{get; private set;}
-        private string Teléfono{get; private set;}
-        private string Especialidad{ get; private set;}
+        public string DNI{get; private set;}
+        public string Teléfono{get; private set;}
+        public string Especialidad{ get; private set;}
         public bool Disponible;
         public Instructor(string Nombre, string Apellido, string DNI, string Teléfono, string Especialidad, bool Disponible){
             Validaciones.Nombre_Apellido(Nombre);
