@@ -21,17 +21,19 @@ namespace Skillup_Workshop
             this.Pagó=Pagó;
             this.Estado=Estado;
         }
-        //public void agregarTaller(string Nombre, string Descripción, uint Costo, byte Duración, byte Cupos, Instructor instructor, string Lugar, string Dirección, byte CapacidadMax, bool AccesForDisabled){
-            //taller=new Taller(Nombre, Descripción,Costo, Duración, Cupos, instructor, Lugar, Dirección, CapacidadMax, AccesForDisabled);
-        //}
-        public void SetEstado(string _estado){
-            foreach(string estado in estados){
-                if(_estado!=estado){
+        
+        public void SetEstado(string _estado)
+        {
+            foreach (string estado in estados)
+            {
+                if (_estado != estado)
+                {
                     throw new Exception("");
                 }
-                Estado=_estado;
-                if(Estado=="Cancelado"){
-                    alumno=null;
+                Estado = _estado;
+                if (Estado == "Cancelado")
+                {
+                    alumno = null;
                 }
             }
         }
