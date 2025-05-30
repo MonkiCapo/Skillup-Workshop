@@ -83,7 +83,12 @@ namespace Skillup_Workshop
                 alumno = null!;
             }
         }
-        public static void valorCero(var numero){
+        public static void valorCeroByte(byte numero){
+            if(numero==0){
+                throw new ArgumentException("El número ingresado debe ser mayor a 0");
+            }
+        }
+        public static void valorCeroUINT(uint numero){
             if(numero==0){
                 throw new ArgumentException("El número ingresado debe ser mayor a 0");
             }
