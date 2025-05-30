@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -132,7 +132,7 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
                         Console.WriteLine("=============================");
                         }
                     }
-                    Console.WriteLine($"Cupos disponibles: {tallerAccedido.cupos-CuposOcupados}\nCupos ocupados: {CuposOcupados}");
+                    Console.WriteLine($"Cupos disponibles: {tallerAccedido.Cupos-CuposOcupados}\nCupos ocupados: {CuposOcupados}");
                     break;
                 case "4":
                     tallerAccedido.EliminarTaller_E_Inscripciones(tallerAccedido);
