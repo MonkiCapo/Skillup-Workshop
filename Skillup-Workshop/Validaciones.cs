@@ -10,7 +10,7 @@ namespace Skillup_Workshop
     {
         public static void Longitud(string cadena)
         {
-            if (cadena.Length > 35)
+            if (cadena.Length > 35 || String.IsNullOrWhiteSpace(cadena))
             {
                 throw new ArgumentException("Sobrepasa el límite de 35 caracteres");
             }
@@ -63,9 +63,9 @@ namespace Skillup_Workshop
         }
         public static void Nacimiento(DateTime Nacimiento)
         {
-            if (Nacimiento >= DateTime.Now.Date.AddYears(-18))
+            if (Nacimiento >= DateTime.Now.Date.AddYears(-13))
             {
-                throw new ArgumentException("Es necesario tener más de 18 años para ingresar al programa.");
+                throw new ArgumentException("Es necesario tener más de 13 años para ingresar al programa.");
             }
         }
         public static void Dificultad(string _dificultad)
@@ -73,17 +73,20 @@ namespace Skillup_Workshop
             string[] dificultades = { "Facil", "Intermedio", "Avanzado" };
             if (dificultades.FirstOrDefault(d => d.ToLower() == _dificultad.ToLower().Trim()) is null) throw new ArgumentException("Dificultad no encontrada");
         }
-        public static void Estado(string estado)
+        public static void Estado(string estado, Alumno alumno)
         {
             string[] estados = { "Activo", "Cancelado", "Finalizado" };
             estado = estado.Trim().ToLower();
             if (estados.FirstOrDefault(e => e.ToLower() == estado) is null) throw new Exception("Estado no encontrado");
-            // foreach (string elemento in estados) {
-            //     if (!estado.Equals(estados[2], StringComparison.OrdinalIgnoreCase)) {
-
-            //     }else if (!estado.Equals(elemento, StringComparison.OrdinalIgnoreCase)) {
-            //         throw new ArgumentException("");
-            //     }
+            else if (estados[2].ToLower() == estado)
+            {
+                alumno = null!;
+            }
+        }
+        public static void valorCero(var numero){
+            if(numero==0){
+                throw new ArgumentException("El número ingresado debe ser mayor a 0");
+            }
         }
     }
 }
