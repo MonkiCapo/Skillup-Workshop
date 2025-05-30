@@ -8,37 +8,24 @@ namespace Skillup_Workshop
 {
     public class Inscripción
     {
-        public Alumno? alumno{get; private set;}
+        public Alumno alumno{get; private set;}
         public Taller taller{get; private set;}
         public DateTime fechaInscripción{get; private set;}
-        public bool Pagó{get; private set;}
-        public string Estado {get; private set;}
-        public List<string> estados= new List<string>(){"Activa","Cancelada","Finalizada"};
-        public Inscripción(Alumno alumno,Taller taller, bool Pagó, string Estado){
-            this.alumno=alumno;
-            this.taller=taller;
-            fechaInscripción=DateTime.Now;
-            this.Pagó=Pagó;
-            this.Estado=Estado;
+        public bool Pagó{get; set;}
+        private string estado;
+        public string Estado { get { return estado; } set{
+                Validaciones.Estado(value);
+                estado = value;
+            } 
         }
-        
-        public void SetEstado(string _estado)
+        public Inscripción(Alumno alumno, Taller taller, bool Pagó, string Estado)
         {
-            foreach (string estado in estados)
-            {
-                if (_estado != estado)
-                {
-                    throw new Exception("");
-                }
-                Estado = _estado;
-                if (Estado == "Cancelado")
-                {
-                    alumno = null;
-                }
-            }
-        }
-        public void SetPagó(bool pagó){
-            Pagó=pagó;
+            this.alumno = alumno ?? throw new ArgumentException("Alumno Invalido");
+            this.taller = taller;
+            fechaInscripción = DateTime.Now;
+            this.Pagó = Pagó;
+            Validaciones.Estado(Estado);
+            this.Estado = Estado;
         }
     }
 }

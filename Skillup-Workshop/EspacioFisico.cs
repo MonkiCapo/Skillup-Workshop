@@ -9,17 +9,28 @@ namespace Skillup_Workshop
     public class EspacioFísico
     {
         // Terminado
-        public string Lugar {get; private set;}
-        public string Dirección{get; private set;}
-        public ushort CapacidadMax{get; private set;}
-        public bool AccesoMovilidadReducida{get; private set;}
-        public EspacioFísico(string Lugar, string Dirección, ushort CapacidadMax, bool AccesoMovilidadReducida){
+        private string? lugar;
+        private string? dirección;
+        public uint CapacidadMax { get; private set; }
+        public bool AccesoMovilidadReducida;
+        public string Lugar{get {return lugar!;}set{
+                Validaciones.Dirección(value);
+                lugar = value;
+            }
+        }
+        public string Dirección{get{ return dirección!;} set{
+                Validaciones.Dirección(value);
+                dirección = value;
+            } 
+        }
+        public EspacioFísico(string Lugar, string Dirección, uint CapacidadMax, bool AccesoMovilidadReducida)
+        {
             Validaciones.Dirección(Lugar);
-            this.Lugar=Lugar;
+            this.Lugar = Lugar;
             Validaciones.Dirección(Dirección);
-            this.Dirección=Dirección;
-            this.CapacidadMax=CapacidadMax;
-            this.AccesoMovilidadReducida=AccesoMovilidadReducida; 
+            this.Dirección = Dirección;
+            this.CapacidadMax = CapacidadMax;
+            this.AccesoMovilidadReducida = AccesoMovilidadReducida;
         }
     }
 }

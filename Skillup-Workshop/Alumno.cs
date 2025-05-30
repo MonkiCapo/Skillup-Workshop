@@ -9,17 +9,66 @@ namespace Skillup_Workshop
     {
         //Terminado
         private string nombre;
-        public string Nombre { get { return nombre; } set { Validaciones.Longitud(value); nombre = value; } }
         private string apellido;
-        public string Apellido { get { return apellido; } set { Validaciones.Longitud(value); apellido = value; } }
         public DateTime Nacimiento { get; private set; }
         private string correo;
-        public string Correo { get { return correo; } set { Validaciones.Correo(value); correo = value; } }
         private string teléfono;
-        public string Teléfono { get { return teléfono; } set { Validaciones.Teléfono(value); teléfono = value; } }
         private string dirección;
-        public string Dirección { get { return dirección; } set { Validaciones.Dirección(value); dirección = value; } }
-        public string ContactoEmergente;
+        private string contactoEmergente;
+        public string Nombre
+        {
+            get { return nombre; }
+            set
+            {
+                Validaciones.Longitud(value);
+                nombre = value;
+            }
+        }
+        public string Apellido
+        {
+            get { return apellido; }
+            set
+            {
+                Validaciones.Longitud(value);
+                apellido = value;
+            }
+        }
+        public string Correo
+        {
+            get { return correo; }
+            set
+            {
+                Validaciones.Correo(value);
+                correo = value;
+            }
+        }
+        public string Teléfono
+        {
+            get { return teléfono; }
+            set
+            {
+                Validaciones.Teléfono(value);
+                teléfono = value;
+            }
+        }
+        public string Dirección
+        {
+            get { return dirección; }
+            set
+            {
+                Validaciones.Dirección(value);
+                dirección = value;
+            }
+        }
+        public string ContactoEmergente
+        {
+            get { return contactoEmergente; }
+            set
+            {
+                Validaciones.Teléfono(value);
+                contactoEmergente = value;
+            }
+        }
         public Alumno(string Nombre, string Apellido, DateTime Nacimiento, string Correo, string Teléfono, string Dirección, string ContactoEmergente)
         {
             Validaciones.Longitud(Nombre);
@@ -37,23 +86,41 @@ namespace Skillup_Workshop
             Validaciones.Teléfono(ContactoEmergente);
             this.ContactoEmergente = ContactoEmergente;
         }
-
         public static Alumno CrearAlumno()
         {
-            Console.WriteLine("Nombre: "); var nombre = Console.ReadLine();
-            Console.WriteLine("Apellido: "); var apellido = Console.ReadLine();
-            Console.WriteLine("Nacimiento (yyyy-MM-dd): "); 
-            DateTime nacimiento;
-            while (!DateTime.TryParse(Console.ReadLine(), out nacimiento))
-            {
-                Console.WriteLine("Fecha inválida. Intente de nuevo (yyyy-MM-dd): ");
-            }
-            Console.WriteLine("Correo: "); var correo = Console.ReadLine();
-            Console.WriteLine("Teléfono: "); var telefono = Console.ReadLine();
-            Console.WriteLine("Dirección: "); var direccion = Console.ReadLine();
-            Console.WriteLine("Contacto Emergente: "); var contactoEmergente = Console.ReadLine();
+            Console.WriteLine("\t------ Rellenar datos del Alumno ------");
+            Console.WriteLine("Nombre: ");
+            string nombre = Console.ReadLine()!;
 
-            return new Alumno(nombre, apellido, nacimiento, correo, telefono, direccion, contactoEmergente);
+            Console.WriteLine("Apellido: ");
+            string apellido = Console.ReadLine()!;
+
+            Console.WriteLine("Nacimiento (yyyy-MM-dd): ");
+            DateTime nacimiento = DateTime.Parse(Console.ReadLine()!);
+
+            Console.WriteLine("Correo: ");
+            string correo = Console.ReadLine()!;
+
+            Console.WriteLine("Teléfono: ");
+            string teléfono = Console.ReadLine()!;
+
+            Console.WriteLine("Dirección: ");
+            string dirección = Console.ReadLine()!;
+
+            Console.WriteLine("Contacto Emergente: ");
+            string contactoEmergente = Console.ReadLine()!;
+
+            return new Alumno(nombre, apellido, nacimiento, correo, teléfono, dirección, contactoEmergente);
         }
-    }
+        public void MostrarInformación()
+        {
+            Console.WriteLine($"\t------ Datos del Alumno {nombre} {apellido} ------");
+            Console.WriteLine($"Nombre Completo: {nombre} {apellido}");
+            Console.WriteLine($"Nacimiento: {Nacimiento}");
+            Console.WriteLine($"Correo: {correo}");
+            Console.WriteLine($"Teléfono: {teléfono}");
+            Console.WriteLine($"Dirección: {dirección}");
+            Console.WriteLine($"Contacto de Emergencia: {contactoEmergente}");
+        }
+    } 
 }

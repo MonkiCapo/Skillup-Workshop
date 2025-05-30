@@ -8,39 +8,93 @@ namespace Skillup_Workshop
 {
     public class Instructor
     {
-        public string Nombre{get; private set;}
-        public string Apellido{get; private set;}
-        public string DNI{get; private set;}
-        public string Teléfono{get; private set;}
-        public string Especialidad{ get; private set;}
+        private string nombre;
+        private string apellido;
+        private string dni;
+        private string teléfono;
+        private string especialidad;
         public bool Ocupado{get; private set;} //False: no está en ningun taller ; True: esta ubicado en un solo taller.
-        public bool Disponible{get; private set;} // False: No acepta más talleres ; True: Acepta dar más talleres
-        public Instructor(string Nombre, string Apellido, string DNI, string Teléfono, string Especialidad, bool Disponible){
-            Validaciones.Longitud(Nombre);
-            this.Nombre=Nombre;
-            Validaciones.Longitud(Apellido);
-            this.Apellido=Apellido; 
-            Validaciones.DNI(DNI);
-            this.DNI=DNI; 
-            Validaciones.Teléfono(Teléfono);
-            this.Teléfono=Teléfono; 
-            Validaciones.Longitud(Especialidad);
-            this.Especialidad=Especialidad;
-            this.Disponible=Disponible;
-        }
-        public void SetTeléfono(string teléfono){
-            Validaciones.Teléfono(teléfono);
-            Teléfono=teléfono;
-        }
-
-        public void SetOcupado(bool ocupado){
-            if(!Ocupado && ocupado){
-                Ocupado=ocupado;
+        public bool Disponible{get; set;} // False: No acepta más talleres ; True: Acepta dar más talleres
+        public string Nombre
+        {
+            get{return nombre;}
+            set{
+                Validaciones.Longitud(value);
+                nombre = value;
             }
         }
-        public void SetDisponibilidad(bool disponible){
-            Disponible=disponible;
+        public string Apellido
+        {
+            get{return apellido;}
+            set{
+                Validaciones.Longitud(value);
+                apellido = value;
+            }
         }
-        
+        public string DNI
+        {
+            get{return dni;}
+            set{
+                Validaciones.DNI(value);
+                dni = value;
+            }
+        }
+        public string Teléfono
+        {
+            get{return teléfono;}
+            set{
+                Validaciones.Teléfono(value);
+                teléfono = value;
+            }
+        }
+        public string Especialidad
+        {
+            get{return especialidad;}
+            set{
+                Validaciones.Longitud(value);
+                especialidad = value;
+            }
+        }
+        public Instructor(string Nombre, string Apellido, string DNI, string Teléfono, string Especialidad)
+        {
+            Validaciones.Longitud(Nombre);
+            this.Nombre = Nombre;
+            Validaciones.Longitud(Apellido);
+            this.Apellido = Apellido;
+            Validaciones.DNI(DNI);
+            this.DNI = DNI;
+            Validaciones.Teléfono(Teléfono);
+            this.Teléfono = Teléfono;
+            Validaciones.Longitud(Especialidad);
+            this.Especialidad = Especialidad;
+        }
+
+        public static Instructor CrearInstructor()
+        { 
+            Console.WriteLine("\t------ Rellenar datos del Instructor ------");
+            Console.Write("Nombre: ");
+            string Inombre= Console.ReadLine()!;
+            
+            Console.Write("Apellido: ");
+            string Iapellido= Console.ReadLine()!;
+
+            Console.Write("DNI: ");
+            string DNI= Console.ReadLine()!;
+
+            Console.Write("Teléfono: ");
+            string teléfono= Console.ReadLine()!;
+
+            Console.Write("Especialidad: ");
+            string especialidad= Console.ReadLine()!;
+
+            return new Instructor(Inombre, Iapellido, DNI, teléfono, especialidad);
+        }
+        public void SetOcupado(bool ocupado)
+        {
+            if (!Ocupado && ocupado)
+            {
+                Ocupado = ocupado;
+            }
+        } 
     }
 }
