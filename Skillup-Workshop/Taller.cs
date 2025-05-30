@@ -127,7 +127,7 @@ namespace Skillup_Workshop
             Console.WriteLine($"Eliminando {taller.inscripción?.Count ?? 0} inscripciones del taller: {Nombre}");
             taller.inscripción?.Clear();
         }
-        
+
         public void MostrarInformación()
         {
             Console.WriteLine($"\t------ Información del Taller {nombre} ------");
@@ -140,7 +140,7 @@ namespace Skillup_Workshop
 
         public void AsignarInstructor(Instructor instructor)
         {
-            if (instructor.Ocupado){
+            if (instructor.Asignado){
                 if (!instructor.Disponible)
                 {
                     throw new Exception("El instructor no se encuentra disponible para dar más clases.");
