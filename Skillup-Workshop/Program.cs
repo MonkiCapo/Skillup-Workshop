@@ -1,10 +1,9 @@
-﻿﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Skillup_Workshop;
 
-List<string> opciones = new List<string>();
 List<Taller> talleres = new List<Taller>
 {
     new Taller("Programación", "Enseñamos lenguajes de programación como C#", 15000, 12, 20, "Intermedio", "Retiro", "Av. Libertador 2811", 100, false),
@@ -41,7 +40,7 @@ List<Inscripción> inscripcións = new List<Inscripción>
 
 Regresar:
 Console.WriteLine("------ Opciones ------");
-Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opciones de taller\n5. Opciones alumno\n6. Salir del programa");
+Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opciones de taller\n5. Opciones alumno\n6. Opciones instructor\n7. Salir");
     switch (Console.ReadLine())
     {
         case "1":
@@ -52,23 +51,21 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
             }
             catch
             {
-                Console.WriteLine("Error al crear taller. Volviendo al inicio.");
+                Console.WriteLine("¡¡ Registro Fallido !!\nVolviendo al inicio...");
                 goto Regresar;
             }
             Console.WriteLine("Desea continuar?(s/n)");
-            if (String.Compare(Console.ReadLine()!.Trim(),"s", true)==0){
+            if (String.Compare(Console.ReadLine()!.Trim(), "s", true) == 0){
                 goto Regresar;
             }
             break;
         case "2":
-            try
-            {
+            try{
                 instructors.Add(Instructor.CrearInstructor());
                 Console.WriteLine("****** Registro Exitoso ******");
-            }
-            catch
+            }catch
             {
-                Console.WriteLine("Error al crear instructor. Volviendo al inicio.");
+                Console.WriteLine("¡¡ Registro Fallido !!\nVolviendo al inicio...");
                 goto Regresar;
             }
             Console.WriteLine("Desea continuar?(s/n)");
@@ -77,19 +74,18 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
             }
             break;
         case "3":
-            try
-            {
+            try{
                 alumnos.Add(Alumno.CrearAlumno());
                 Console.WriteLine("****** Registro Exitoso ******");
             }
             catch
             {
-                Console.WriteLine("Error al crear alumno. Volviendo al inicio.");
+                Console.WriteLine("¡¡ Registro Fallido !!\nVolviendo al inicio...");
                 goto Regresar;
             }
             Console.WriteLine("Desea continuar?(s/n)");
             if (String.Compare(Console.ReadLine()!.Trim(),"s", true)==0){
-            goto Regresar;
+                goto Regresar;
             }
         break;
         case "4": //Opciones de taller
@@ -98,21 +94,14 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
             foreach(Taller t in talleres) {
                 Console.WriteLine(t.Nombre);
             }
+            Console.WriteLine("================");
             Console.WriteLine("Acceder a: ");
             string acceder_A = Console.ReadLine()!.Trim().ToLower();
-            Taller tallerAccedido;
-            try
-            {
-                tallerAccedido = talleres.Find(taller => taller.Nombre.ToLower() == acceder_A) ?? throw new ArgumentException("Taller no encontrado");
-            }
-            catch
-            {
-                Console.WriteLine("Taller no encontrado. Volviendo al inicio.");
-                goto Regresar;
-            }
+            var tallerAccedido=talleres.Find(taller => taller.Nombre.ToLower() == acceder_A) ?? throw new Exception("Taller no encontrado");
             Console.WriteLine("****** Taller Encontrado ******");
             
-            Console.WriteLine("Acciones para realizar: \n 1- Mostrar Información\n 2- Asignar/Desasignar/Cambiar Instructor\n 3- Mostrar Inscripciones\n 4- Eliminar taller");
+            Console.WriteLine("Acciones para realizar: \n 1- Mostrar Información\n 2- Asignar/Cambiar Instructor\n 3- Mostrar Inscripciones\n 4- Eliminar taller");
+            Console.WriteLine("=============================");
             switch (Console.ReadLine()){
                 case "1":
                     tallerAccedido.MostrarInformación();
@@ -123,26 +112,16 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
                     {
                         if (instructor.Disponible == true)
                         {
-                            Console.WriteLine($"Nombre: {instructor.Nombre} DNI: {instructor.DNI} Disponible: {instructor.Disponible}");
+                            Console.WriteLine($"Nombre: {instructor.Nombre} DNI: {instructor.DNI} Disponible: {(instructor.Disponible ? "Si" : "No")}");
                         }
                     }
-                    Console.Write("Ponga el DNI del Instructor a elegir: ");
+                    Console.Write("DNI del Instructor a elegir: ");
                     string buscarInstructor = Console.ReadLine()!;
-                    Instructor InstructorEncontrado;
-                    try
-                    {
-                        InstructorEncontrado = instructors.Find(instructors => instructors.DNI == buscarInstructor) ?? throw new ArgumentException("Instructor no encontrado");
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Instructor no encontrado. Volviendo al inicio.");
-                        goto Regresar;
-                    }
+                    var InstructorEncontrado = instructors.Find(instructors => instructors.DNI == buscarInstructor) ?? throw new ArgumentException("Instructor no encontrado");
                     tallerAccedido.AsignarInstructor(InstructorEncontrado);
                     Console.WriteLine("\t*** Instructor asignado exitosamente ***");
                     break;
                 case "3":
-                    Console.WriteLine("=============================");
                     var CuposOcupados = 0;
                     foreach (Inscripción inscripción in inscripcións)
                     {
@@ -164,9 +143,6 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
                         goto Regresar;
                     }
                 break;   
-                default:
-                    Console.WriteLine("Opción no válida. Volviendo al inicio.");
-                    goto Regresar;
                 }
             Console.WriteLine("Desea continuar?(s/n)");
             if (String.Compare(Console.ReadLine()!.Trim(), "s", true) == 0)
@@ -177,16 +153,7 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
         case "5": //Opciones de Alumno
             Console.WriteLine("Ingrese el correo electrónico del estudiante");
             string buscarCorreo = Console.ReadLine()!;
-            Alumno registrado;
-            try
-            {
-                registrado = alumnos.Find(alumno => alumno.Correo== buscarCorreo) ?? throw new ArgumentException("Alumno no encontrado");
-            }
-            catch
-            {
-                Console.WriteLine("Alumno no encontrado. Volviendo al inicio.");
-                goto Regresar;
-            }
+            var registrado = alumnos.Find(alumno => alumno.Correo== buscarCorreo) ?? throw new ArgumentException("Alumno no encontrado");
             Console.WriteLine("------ Lista de Talleres------");
             foreach(Taller t in talleres) {
                 Console.WriteLine(t.Nombre);
@@ -196,56 +163,52 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
             {
                 case "1":
                     registrado.MostrarInformación();
-                    goto Regresar;
                 break;
                 case "2":
                     Console.WriteLine($"------ Inscripciones del Alumno ------");
                     foreach (Inscripción inscripción in inscripcións){
                         if(inscripción.alumno==registrado){
-                            Console.WriteLine($"Taller: {inscripción.taller.Nombre}\nFecha de Inscripción:{inscripción.fechaInscripción}\n Pagó {(inscripción.Pagó ? "Si" : "No")}\nEstado: {inscripción.Estado}");
+                            Console.WriteLine($"Taller: {inscripción.taller.Nombre}\nFecha de Inscripción:{inscripción.fechaInscripción}\n Pagó {(inscripción.Pagó ? "Si" : "No")}\nEstado: {inscripción.Estado}"); 
                             Console.WriteLine("=================");
                         }
                     }
                     Console.Write($"Acceder a la inscripción del taller: ");
-                    Console.Write("Ingrese el nombre del taller a cancelar: ");
-                    string tallerCancelar = Console.ReadLine()!.Trim().ToLower();
-                    Taller tallerACancelar;
-                    try
-                    {
-                        tallerACancelar = talleres.Find(t => t.Nombre.ToLower() == tallerCancelar) ?? throw new ArgumentException("Taller no encontrado");
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Taller no encontrado. Volviendo al inicio.");
-                        goto Regresar;
-                    }
-                    var aCancelar = inscripcións.Find(i => i.taller == tallerACancelar && i.alumno == registrado);
+                    string InscripcionDelTaller = Console.ReadLine()!;
+                    var aCancelar = inscripcións.Find(i => i.taller.Nombre == InscripcionDelTaller) ?? throw new Exception("Inscripción no encontrada");
+                    aCancelar.Estado="Cancelado";
+                    Console.WriteLine("****** Inscripción cancelada exitosamente ******");
                 break;
                 case "3":
                     Console.Write("Inscribirse en el taller: ");
                     string inscribirEn = Console.ReadLine()!.ToLower().Trim();
-                    Taller tallerElegido;
-                    try
-                    {
-                        tallerElegido = talleres.Find(taller => taller.Nombre.ToLower() == inscribirEn) ?? throw new ArgumentException("Taller no encontrado");
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Taller no encontrado. Volviendo al inicio.");
-                        goto Regresar;
-                    }
+                    var tallerElegido=talleres.Find(taller => taller.Nombre.ToLower() == inscribirEn) ?? throw new ArgumentException("Taller no encontrado"); 
                     tallerElegido.IniciarInscripción(registrado,true,"Activa");
                 break;
-                default:
-                    Console.WriteLine("Opción no válida. Volviendo al inicio.");
-                    goto Regresar;
             }
             break;
-         default:
-             Console.WriteLine("Opción no válida.");
-             goto Regresar;
+            case "6":
+                Console.WriteLine("\t------ Lista de instructores------");
+                foreach (Instructor instructor in instructors)
+                {
+                    Console.WriteLine($"Nombre: {instructor.Nombre} DNI: {instructor.DNI} Asignado: {(instructor.Asignado ? "Si" : "No")}Disponible: {(instructor.Disponible ? "Si" : "No")}");
+                }
+                Console.Write("DNI del Instructor a elegir: ");
+                string buscarInstructor2 = Console.ReadLine()!;
+                var InstructorEncontrado2 = instructors.Find(instructors => instructors.DNI == buscarInstructor2) ?? throw new ArgumentException("Instructor no encontrado");
 
-            case "6": 
-                break;
-            
+                Console.WriteLine("Sacar disponibilidad?(s/n)");
+                if (String.Compare(Console.ReadLine()!.Trim(), "s", true) == 0){
+                    InstructorEncontrado2.Disponible = false;
+                    Console.WriteLine("*** Ya no tiene disponibilidad");
+                }
+                else{
+                    Console.WriteLine("Regresando...");
+                    goto Regresar;
+                }
+            break;
+            case "7":
+            break;
+        default:
+            Console.WriteLine("Opción no válida.");
+            goto Regresar;
     }
