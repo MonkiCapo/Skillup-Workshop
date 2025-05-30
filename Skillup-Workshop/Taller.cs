@@ -12,8 +12,8 @@ namespace Skillup_Workshop
         private string nombre;
         private string descripción;
         private uint costo; //En pesos
-        public byte duración; //En semanas
-        public byte cupos;
+        private byte duración; //En semanas
+        private byte cupos;
         private string dificultad;
         public Instructor instructor { get; private set; }
         public EspacioFísico espacioFísico { get; private set; }
@@ -40,9 +40,20 @@ namespace Skillup_Workshop
         {
             get { return costo; }
             set
-            {
+            {   
+                Validaciones.valorCeroUINT(value);
                 costo = value;
             }
+        }
+        public byte Duración{get{return duración;}set{
+            Validaciones.valorCeroByte(value);
+            duración=value;
+        }}
+        public byte Cupos{ get{return cupos;} set{
+            Validaciones.valorCeroByte(value);
+            cupos=value;
+        }
+
         }
         public string Dificultad
         {
@@ -59,6 +70,9 @@ namespace Skillup_Workshop
             this.Nombre = Nombre;
             Validaciones.Descripción(Descripción);
             this.Descripción = Descripción;
+            Validaciones.valorCeroUINT(Costo);
+            Validaciones.valorCeroByte(Duración);
+            Validaciones.valorCeroByte(Cupos);
             this.Costo = Costo;
             duración = Duración;
             cupos = Cupos;
