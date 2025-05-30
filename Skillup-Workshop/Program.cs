@@ -27,7 +27,11 @@ List<Alumno> alumnos = new List<Alumno>{
 };
 List<Instructor> instructors = new List<Instructor>
 {
-    
+    new Instructor("Carlos", "Pérez", "30123456", "1134567890", "Programación"),
+    new Instructor("María", "Gómez", "30234567", "1145678901", "Mecánica Automotriz"),
+    new Instructor("Luis", "Fernández", "30345678", "1156789012", "Torneria"),
+    new Instructor("Ana", "Martínez", "30456789", "1167890123", "Metales"),
+    new Instructor("Jorge", "López", "30567890", "1178901234", "Electricidad")
 };
 List<Inscripción> inscripcións = new List<Inscripción>
 {
@@ -192,7 +196,7 @@ Console.WriteLine("1. Crear Taller\n2. Crear Instructor\n3. Crear Alumno\n4. Opc
             {
                 case "1":
                     registrado.MostrarInformación();
-                goto Regresar;
+                    goto Regresar;
                 break;
                 case "2":
                     Console.WriteLine($"------ Inscripciones del Alumno ------");
