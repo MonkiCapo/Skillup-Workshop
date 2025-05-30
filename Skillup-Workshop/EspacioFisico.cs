@@ -11,7 +11,11 @@ namespace Skillup_Workshop
         // Terminado
         private string? lugar;
         private string? dirección;
-        public uint CapacidadMax { get; private set; }
+        private uint capacidadMax;
+        public uint CapacidadMax{get{return capacidadMax;}set{
+            Validaciones.valorCeroUINT(value);
+            capacidadMax=value;
+        }}
         public bool AccesoMovilidadReducida;
         public string Lugar{get {return lugar!;}set{
                 Validaciones.Dirección(value);
