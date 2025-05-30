@@ -13,7 +13,7 @@ namespace Skillup_Workshop
         private string dni;
         private string teléfono;
         private string especialidad;
-        public bool Ocupado{get; private set;} //False: no está en ningun taller ; True: esta ubicado en un solo taller.
+        public bool Asignado{get; private set;} //False: no está en ningun taller ; True: esta ubicado en un solo taller.
         public bool Disponible{get; set;} // False: No acepta más talleres ; True: Acepta dar más talleres
         public string Nombre
         {
@@ -67,6 +67,7 @@ namespace Skillup_Workshop
             this.Teléfono = Teléfono;
             Validaciones.Longitud(Especialidad);
             this.Especialidad = Especialidad;
+            Disponible = true;
         }
 
         public static Instructor CrearInstructor()
@@ -89,11 +90,11 @@ namespace Skillup_Workshop
 
             return new Instructor(Inombre, Iapellido, DNI, teléfono, especialidad);
         }
-        public void SetOcupado(bool ocupado)
+        public void SetOcupado(bool asignado)
         {
-            if (!Ocupado && ocupado)
+            if (!Asignado && asignado)
             {
-                Ocupado = ocupado;
+                Asignado = asignado;
             }
         } 
     }
