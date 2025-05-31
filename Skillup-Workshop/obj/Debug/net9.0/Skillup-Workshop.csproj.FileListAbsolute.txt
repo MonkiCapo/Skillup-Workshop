@@ -1,0 +1,14 @@
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\bin\Debug\net9.0\Skillup-Workshop.exe
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\bin\Debug\net9.0\Skillup-Workshop.deps.json
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\bin\Debug\net9.0\Skillup-Workshop.runtimeconfig.json
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\bin\Debug\net9.0\Skillup-Workshop.dll
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\bin\Debug\net9.0\Skillup-Workshop.pdb
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.AssemblyInfoInputs.cache
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.AssemblyInfo.cs
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.csproj.CoreCompileInputs.cache
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.dll
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\refint\Skillup-Workshop.dll
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.pdb
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\Skillup-Workshop.genruntimeconfig.cache
+C:\Users\NoxiePC\Documents\Laboratorio 5°7\Skillup-Workshop_vers2\obj\Debug\net9.0\ref\Skillup-Workshop.dll

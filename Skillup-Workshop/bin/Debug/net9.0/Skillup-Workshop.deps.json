@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Skillup-Workshop/1.0.0": {
+        "runtime": {
+          "Skillup-Workshop.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Skillup-Workshop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
