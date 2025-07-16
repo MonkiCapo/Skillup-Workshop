@@ -1,5 +1,5 @@
-## SkillUp Workshops
-# Relevamiento
+# SkillUp Workshops
+## Relevamiento
 
 El siguiente extracto se obtuvo de una entrevista realizada con el cliente:
 Nosotros somos SkillUp, una startup que conecta a gente que quiere aprender oficios con talleres presenciales.
@@ -23,7 +23,7 @@ Que no se pueda inscribir a alguien en un taller que ya está lleno.
 Que las fechas de inscripción tengan sentido.
 Y por favor, que todo eso esté concentrado en una sola parte del sistema. Si hay algún error en los datos, queremos que el sistema lo indique bien clarito para poder corregirlo rápido.
 
-# Restricciones Técnicas
+## Restricciones Técnicas
 
 El sistema debe ser desarrollado como un proyecto de consola en C#.
 Las entidades deben aplicar encapsulamiento, utilizando atributos privados con accesos controlados mediante métodos públicos.
