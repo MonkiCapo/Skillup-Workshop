@@ -5,8 +5,8 @@ namespace Biblioteca
         public DateTime FechaNacimiento { get; private set; }
         public string Dirección { get; private set; }
         public string ContactoEmergente { get; private set; }
-        public List<Evaluacion>? Evaluaciones { get; private set; }
-        public List<Evaluacion>? Devoluciones { get; private set; }
+        public List<Evaluacion> Evaluaciones { get; private set; }
+        public List<Evaluacion> Devoluciones { get; private set; }
         public List<object> Notificaciones { get; private set; }
 
         public Alumno(string nombre, string apellido, string correo, string teléfono, DateTime nacimiento, string dirección, string contactoEmergente)

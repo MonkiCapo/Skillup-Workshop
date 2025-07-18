@@ -47,7 +47,10 @@ namespace Biblioteca
 
             return new Instructor(Inombre, Iapellido, Icorreo, DNI, teléfono, especialidad);
         }
-        public void MarcarAsistencia() { /* lógica */ }
+        public void MarcarAsistencia()
+        {
+            
+        } 
         public void CorregirEvaluaciones(Evaluacion evaluacion, int puntaje)
         {
             if (evaluacion is EvaluacionEscrita)
@@ -88,24 +91,25 @@ namespace Biblioteca
         }
         public override void MostrarMenu(List<Taller> talleres, List<Instructor> instructors, List<Alumno> alumnos)
         {
-            Console.WriteLine("1. Ver talleres asignados\n2. Corregir evaluaciones\n3. Marcar asistencia\n4. Contactar alumnos");
+            Regresar:
+            Console.WriteLine("1. Ver talleres asignados\n2. Corregir evaluaciones\n3. Marcar asistencia\n4. Contactar alumnos\n5. Crear Evaluación");
             Console.Write("Seleccione una opción: ");
             string opcion = Console.ReadLine()!;
             switch (opcion)
             {
                 case "1":
                     VerTalleresAsignados(talleres);
-                    break;
+                    goto Regresar;
                 case "2":
                     foreach (Taller taller in talleres)
                     {
                         if (taller.instructor == this)
                         {
-                            int i = 0;
+                            int i1 = 1;
                             foreach (Evaluacion evaluacion in taller.Evaluaciones)
                             {
-                                Console.WriteLine($"{i}- {evaluacion.TipoEvaluacion}\n Alumno: {evaluacion.alumno}. Puntuación {evaluacion.PuntajeMaximo}, Taller: {evaluacion.taller.Nombre}");
-                                ++i;
+                                Console.WriteLine($"{i1}- {evaluacion.TipoEvaluacion}\n Alumno: {evaluacion.alumno}. Puntuación {evaluacion.PuntajeMaximo}, Taller: {evaluacion.taller.Nombre}");
+                                ++i1;
                             }
                         }
                         Console.Write("Seleccione la evaluación: ");
@@ -114,33 +118,77 @@ namespace Biblioteca
                         Console.Write("Puntaje: ");
                         byte puntaje = byte.Parse(Console.ReadLine()!);
                         CorregirEvaluaciones(evaluacionElegida, puntaje);
-
                     }
-                    break;
+                    Thread.Sleep(2000);
+                    goto Regresar;
                 case "3":
                     MarcarAsistencia();
                     break;
                 case "4":
-                    Console.WriteLine("Mensaje a enviar: ");
-                    string mensaje = Console.ReadLine()!;
-                    foreach (Taller taller in talleres) {
+                    foreach (Taller taller in talleres)
+                    {
                         if (taller.instructor == this)
                         {
                             foreach (Inscripción inscripcion1 in taller.inscripción)
                             {
                                 if (inscripcion1.Estado == "Activo")
                                 {
-                                    int i = 0;
-                                    Console.WriteLine($"{i} - Nombre:{inscripcion1.alumno.Nombre}, {inscripcion1.alumno.Apellido}, {inscripcion1.taller.Nombre}");
-                                    ++i;
+                                    int i2 = 0;
+                                    Console.WriteLine($"{i2} - Nombre:{inscripcion1.alumno.Nombre}, {inscripcion1.alumno.Apellido}\n Taller{inscripcion1.taller.Nombre}");
+                                    ++i2;
                                 }
                             }
-                            Console.Write("A quien le enviaras este mensaje?");
-                            int alumnoSeleccionado = int.Parse(Console.ReadLine()!);
-                            Alumno receptor = taller.inscripción[alumnoSeleccionado].alumno;
                         }
+                        Console.Write("A quien le enviaras este mensaje?");
+                        int alumnoSeleccionado2 = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Mensaje a enviar: ");
+                        string mensaje = Console.ReadLine()!;
+                        Alumno receptor = taller.inscripción[alumnoSeleccionado2].alumno;
+                        ContactarAlumnos(receptor, mensaje);
                     }
-                    break;
+                    goto Regresar;
+
+                case "5":
+                    Console.WriteLine("Crear Evaluación:");
+                    Console.Write("Ingrese el tipo de evaluación (Escrita/Práctica): ");
+                    string tipoEvaluacion = Console.ReadLine()!;
+                    
+                    Console.Write("Seleccione el alumno: ");
+                    int i = 1;
+                    foreach (Alumno alumno in alumnos)
+                    {
+                        Console.WriteLine($"{i} - {alumno.Nombre} {alumno.Apellido}");
+                        ++i;
+                    }
+                    int alumnoSeleccionado = int.Parse(Console.ReadLine()!);
+                    
+                    Console.Write("Seleccione el taller: ");
+                    i = 1;
+                    foreach (Taller taller in talleres)
+                    {
+                        Console.WriteLine($"{i} - {taller.Nombre}");
+                        ++i;
+                    }
+                    int tallerSeleccionado = int.Parse(Console.ReadLine()!);
+
+                    Alumno alumnoElegido = alumnos[alumnoSeleccionado-1];
+                    Taller tallerElegido = talleres[tallerSeleccionado-1];
+
+                    Evaluacion nuevaEvaluacion;
+                    if (tipoEvaluacion.Equals("Escrita", StringComparison.OrdinalIgnoreCase))
+                    {
+                        nuevaEvaluacion = new EvaluacionEscrita(alumnoElegido, tallerElegido);
+                    }
+                    else
+                    {
+                        nuevaEvaluacion = new EvaluacionPractica(alumnoElegido, tallerElegido);
+                    }
+                    alumnoElegido.Evaluaciones.Add(nuevaEvaluacion);
+                    tallerElegido.Evaluaciones.Add(nuevaEvaluacion);
+                    Console.WriteLine("Evaluación creada exitosamente.");
+                    Console.WriteLine("Regresando...");
+                    Thread.Sleep(2000);
+                    goto Regresar;
                 default:
                     Console.WriteLine("Opción no válida.");
                     break;

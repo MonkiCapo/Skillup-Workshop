@@ -2,9 +2,17 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using Biblioteca;
 
+List<string> Reportes = new List<string>
+{
+    "Reporte de alumnos",
+    "Reporte de instructores",
+    "Reporte de talleres",
+    "Reporte de inscripciones"
+};
 List<Taller> talleres = new List<Taller>
 {
     new Taller("Programación", "Enseñamos lenguajes de programación como C#", 15000, 12, 20, "Intermedio", "Retiro", "Av. Libertador 2811", 100, false),
@@ -38,44 +46,75 @@ List<Administrador> Admins = new List<Administrador>
 {
      new Administrador("Juan", "Diaz", "Juanitogolazo@gmail.com", "1123851645")
 };
-
+Regresar:
+Console.Clear();
 Console.WriteLine("------ Elige tu sesión ------");
-Console.WriteLine("1. Administrador \n2. Instructor\n 3. Alumno");
+Console.WriteLine("1. Administrador \n2. Instructor\n3. Alumno\n4. Crear Administrador");
 switch (Console.ReadLine())
 {
+
     case "1":
-        int num1 = 0;
+        int num1 = 1;
         foreach (Administrador administrador in Admins)
         {
             Console.WriteLine($"{num1} - {administrador.Nombre} {administrador.Apellido}");
+            ++num1;
         }
         Console.WriteLine("Qué administrador sos?");
         int soyEste1 = int.Parse(Console.ReadLine()!);
-        Administrador administrador1 = Admins[soyEste1];
+        Administrador administrador1 = Admins[soyEste1-1];
+        Console.Clear();
         administrador1.MostrarMenu(talleres, instructors, alumnos);
-        break;
+        
+        goto Regresar;
     case "2":
-        int num2 = 0;
+        int num2 = 1;
         foreach (Instructor instructor in instructors)
         {
             Console.WriteLine($"{num2} - {instructor.Nombre} {instructor.Apellido}");
+            ++num2;
         }
         Console.WriteLine("Qué instructor sos?");
         int soyEste2 = int.Parse(Console.ReadLine()!);
-        Instructor instructor1 =instructors[soyEste2];
+        Instructor instructor1 =instructors[soyEste2-1];
+        Console.Clear();
         instructor1.MostrarMenu(talleres, instructors, alumnos);
-        break;
+        goto Regresar;
     case "3":
-        int num3 = 0;
+        int num3 = 1;
         foreach (Alumno alumno in alumnos)
         {
             Console.WriteLine($"{num3} - {alumno.Nombre} {alumno.Apellido}");
+            ++num3;
         }
         Console.WriteLine("Qué alumno sos?");
         int soyEste3 = int.Parse(Console.ReadLine()!);
-        Alumno alumno1 =alumnos[soyEste3];
+        Alumno alumno1 =alumnos[soyEste3-1];
+        Console.Clear();
         alumno1.MostrarMenu(talleres, instructors, alumnos);
-        break;
+        goto Regresar;
+    case "4":
+        try
+        {
+            Console.WriteLine("Ingrese su nombre:");
+            string nombre = Console.ReadLine()!;
+            Console.WriteLine("Ingrese su apellido:");
+            string apellido = Console.ReadLine()!;
+            Console.WriteLine("Ingrese su email:");
+            string email = Console.ReadLine()!;
+            Console.WriteLine("Ingrese su número de teléfono:");
+            string telefono = Console.ReadLine()!;
+            Admins.Add(new Administrador(nombre, apellido, email, telefono));
+            Console.WriteLine("Registro del administrador exitoso.");
+            Console.WriteLine("Regresando..");
+            Thread.Sleep(2000);
+            Console.Clear();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al crear el administrador: {ex.Message}");
+        }
+        goto Regresar;
     default:
         Console.WriteLine("Opción incorrecta.");
         break;
