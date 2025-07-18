@@ -5,33 +5,35 @@ using System.Threading.Tasks;
 
 namespace Biblioteca
 {
-   public class EvaluacionEscrita : Evaluacion
-{
-    public string ArchivoAdjunto { get; private set; }
-
-    public EvaluacionEscrita(int puntajeMax, int porcentajeAprob, string modalidad)
-        : base("Escrita", puntajeMax, porcentajeAprob, modalidad)
+    public class EvaluacionEscrita : Evaluacion
     {
-        ArchivoAdjunto = string.Empty;
-    }
+        public List<string> ArchivosAdjuntos { get; private set; }
 
-    public void AdjuntarArchivo(string archivo)
-    {
-        ArchivoAdjunto = archivo;
-    }
+        public EvaluacionEscrita(Alumno alumno, Taller taller) : base("Escrita", 10, 0, "Virtual", alumno, taller)
+        {
+            ArchivosAdjuntos = new List<string>();
+        }
+        public void AdjuntarArchivo(string archivo)
+        {
+            ArchivosAdjuntos.Add(archivo);
+        }
 
-    public override void Devolucion(string mensajeObservacion)
-    {
-        Observacion = $"[Devolución escrita] {mensajeObservacion}";
-        Console.WriteLine($"Archivo adjunto: {ArchivoAdjunto}");
-        Console.WriteLine($"Observación: {Observacion}");
-    }
+        public override void Devolucion(string mensajeObservacion, int puntajeObtenido)
+        {
+            PorcentajeAprobacion= puntajeObtenido / PuntajeMaximo * 100;
+            Observacion = $"[Devolución escrita] {mensajeObservacion}";
+            Console.WriteLine("Archivos adjuntos:");
+            foreach (var archivo in ArchivosAdjuntos)
+            {
+                Console.WriteLine($"Archivo adjunto: {archivo}");
+            }
+            Console.WriteLine($"Observación: {Observacion}");
+        }
 
-    public override bool EstaAprobado(int puntajeObtenido)
-    {
-        double porcentaje = (double)puntajeObtenido / PuntajeMaximo * 100;
-        return porcentaje >= PorcentajeAprobacion;
+        public override bool EstaAprobado(int puntajeObtenido)
+        {
+            double porcentaje = puntajeObtenido / PuntajeMaximo * 100;
+            return porcentaje >= PorcentajeAprobacion;
+        }
     }
-}
-
 }

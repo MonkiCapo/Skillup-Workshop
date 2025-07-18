@@ -10,7 +10,8 @@ namespace Biblioteca
         private string dificultad;
         public Instructor instructor { get; private set; }
         public EspacioFísico espacioFísico { get; private set; }
-        public List<Inscripción> inscripción { get; private set; }
+        public List<Inscripción> inscripción { get; private set; } = new List<Inscripción>();
+        public List<Evaluacion> Evaluaciones { get; private set; } = new List<Evaluacion>();
         public string Nombre
         {
             get { return nombre; }
@@ -82,7 +83,6 @@ namespace Biblioteca
             this.Dificultad = Dificultad;
             instructor = null!;
             espacioFísico = new EspacioFísico(Lugar, Dirección, CapacidadMax, AccesoMovilidadReducida);
-            inscripción = new List<Inscripción>();
         }
 
         public static Taller CrearTaller()
