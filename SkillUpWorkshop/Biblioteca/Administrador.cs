@@ -12,8 +12,14 @@ namespace Biblioteca
     {
     }
 
-    public void VerReportes() { /* lógica */ }
-    public void GestionarSistema() { /* lógica */ }
+    public void VerReportes()
+    { 
+        
+    }
+    public void GestionarSistema()
+    { 
+        
+    }
 
     public override void MostrarMenu()
     {
