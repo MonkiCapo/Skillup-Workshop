@@ -6,5 +6,9 @@ namespace Biblioteca
         {
 
         }
+        public void MostrarDetalle()
+        {
+             Console.WriteLine($"Actividad: {Titulo}, Responsable: {Responsable}, Espacio: {FisicoEspacio}, Cupo: {CupoMaximo}, Fecha: {Fecha}");
+        }
     }
 }
